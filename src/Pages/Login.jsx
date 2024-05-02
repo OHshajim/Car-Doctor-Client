@@ -3,9 +3,24 @@ import login from '../assets/login/login.svg'
 import { FaFacebook } from 'react-icons/fa';
 import { RiLinkedinFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../Provider/AuthProvider';
 const Login = () => {
+    const { Login } = useContext(AuthContext)
     const handleLogin = e => {
         e.preventDefault()
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        Login(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+
     }
     return (
         <div>

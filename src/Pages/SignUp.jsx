@@ -3,7 +3,23 @@ import Sign from '../assets/login/login.svg'
 import { FaFacebook } from 'react-icons/fa';
 import { RiLinkedinFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../Provider/AuthProvider';
 const SignUp = () => {
+    const { SignUp } = useContext(AuthContext)
+    const handleSignUp = e => {
+        e.preventDefault();
+        const form = e.target;
+        // const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        SignUp(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => { console.log(error) })
+
+    }
     return (
         <div>
             <div className="hero">
@@ -12,7 +28,7 @@ const SignUp = () => {
                         <img src={Sign} alt="" />
                     </div>
                     <div className="card shrink-0 w-full lg:w-1/2 shadow-2xl border border-[rgb(208, 208, 208)] p-10">
-                        <form className="card-body">
+                        <form className="card-body" onSubmit={handleSignUp}>
                             <h1 className="text-3xl text-center font-bold">Sign Up</h1>
                             <div className="form-control">
                                 <label className="label">
