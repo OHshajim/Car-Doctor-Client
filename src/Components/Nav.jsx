@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
-import logo  from "../assets/logo.svg"
+import logo from "../assets/logo.svg"
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 const Nav = () => {
+    const { user, logout } = useContext(AuthContext)
+    const signOut = () => {
+        logout()
+    }
+
     const links = <>
         <li><Link>Home</Link></li>
-        <li><Link>About</Link></li>
         <li><Link>Service</Link></li>
+        {
+            user ? <>
+                <li><Link to='/bookings'>My bookings</Link></li>
+                <li onClick={signOut}><Link> Logout</Link></li>
+
+            </>
+                : <li><Link to='login'>Login</Link></li>
+        }
     </>
     return (
         <div className="max-w-[1600px] mx-auto py-8 ">

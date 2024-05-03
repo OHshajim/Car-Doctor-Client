@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const logout = () => {
+        setLoad(true)
         return signOut(auth);
     }
     useEffect(() => {
@@ -26,11 +27,11 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser)
             setLoad(false)
         });
-        return Unsubscribe()
+        return () => Unsubscribe()
     }, [])
 
 
-    const info = { user, loading, SignUp, Login, logout }
+    const info = { user, loading, SignUp, Login, logout, }
     return (
         <AuthContext.Provider value={info}>
             {children}

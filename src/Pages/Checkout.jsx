@@ -18,9 +18,10 @@ const Checkout = () => {
             customer: name,
             email,
             date,
-            service: _id,
+            service_id: _id,
             price: price,
-            img: img
+            img: img,
+            title: title
         }
         // console.log(order);
         fetch('http://localhost:5000/bookings', {

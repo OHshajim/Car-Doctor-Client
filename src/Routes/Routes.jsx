@@ -5,6 +5,8 @@ import Error from '../Pages/Error';
 import Login from '../Pages/Login';
 import SignUp from '../Pages/SignUp';
 import Checkout from '../Pages/Checkout';
+import Bookings from '../Pages/Bookings';
+import PrivetRoute from '../Provider/PrivetRoute';
 
 const Routes = createBrowserRouter([
     {
@@ -23,6 +25,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/signUp",
                 element: <SignUp/>,
+            },
+            {
+                path: "/bookings",
+                element: <PrivetRoute><Bookings/></PrivetRoute>,
             },
             {
                 path: "/checkout/:id",
