@@ -2,11 +2,13 @@ import { GrGoogle } from 'react-icons/gr';
 import Sign from '../assets/login/login.svg'
 import { FaFacebook } from 'react-icons/fa';
 import { RiLinkedinFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 const SignUp = () => {
     const { SignUp } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
     const handleSignUp = e => {
         e.preventDefault();
         const form = e.target;
@@ -16,6 +18,7 @@ const SignUp = () => {
         SignUp(email, password)
             .then(result => {
                 console.log(result.user);
+                navigate(location?.state ? location?.state : '/')
             })
             .catch(error => { console.log(error) })
 

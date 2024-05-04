@@ -2,19 +2,24 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import BookingsTable from "../Components/Service/BookingsTable";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Bookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([])
     const URL = `http://localhost:5000/bookings?email=${user?.email}`
     useEffect(() => {
-        fetch(URL)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setBookings(data)
-            })
+
+        axios.get(URL, { withCredentials: true })
+            .then(res => { setBookings(res.data) })
+        // fetch(URL)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         setBookings(data)
+        //     })
     }, [URL])
+    
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",

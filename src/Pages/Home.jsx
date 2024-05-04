@@ -6,12 +6,14 @@ import Services from "../Components/Service/Services";
 
 const Home = () => {
     return (
-        <div className="max-w-[1600px] mx-auto px-5">
-            <Banner/>
-            <AboutUs/>
-            <Services/>
-            <Info/>
-            <Footer/>
+        <div>
+            <div  className="max-w-[1600px] mx-auto px-5">
+                <Banner />
+                <AboutUs />
+                <Services />
+                <Info />
+            </div>
+            <Footer />
         </div>
     );
 };

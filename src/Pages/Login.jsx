@@ -5,6 +5,7 @@ import { RiLinkedinFill } from 'react-icons/ri';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
+import axios from 'axios';
 const Login = () => {
     const { Login } = useContext(AuthContext)
     const location = useLocation()
@@ -18,7 +19,17 @@ const Login = () => {
         Login(email, password)
             .then(result => {
                 console.log(result.user);
-                navigate(location?.state ? location?.state : '/')
+                const user = { email }
+                axios.post('http://localhost:5000/jwt', user,{
+                    withCredentials:true 
+                })
+                    .then(res => {
+                        console.log(res.data);
+                        if(res.data==='success'){
+
+                            navigate(location?.state ? location?.state : '/')
+                        }
+                    })
             })
             .catch(error => {
                 console.log(error)
