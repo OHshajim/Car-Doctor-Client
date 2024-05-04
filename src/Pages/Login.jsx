@@ -2,11 +2,14 @@ import { GrGoogle } from 'react-icons/gr';
 import login from '../assets/login/login.svg'
 import { FaFacebook } from 'react-icons/fa';
 import { RiLinkedinFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 const Login = () => {
     const { Login } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
@@ -15,6 +18,7 @@ const Login = () => {
         Login(email, password)
             .then(result => {
                 console.log(result.user);
+                navigate(location?.state ? location?.state : '/')
             })
             .catch(error => {
                 console.log(error)

@@ -32,7 +32,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/checkout/:id",
-                element: <Checkout/>,
+                element: <PrivetRoute><Checkout/></PrivetRoute>,
                 loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
             },
         ]
