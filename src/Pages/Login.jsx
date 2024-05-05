@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 const Login = () => {
     const { Login } = useContext(AuthContext)
     const location = useLocation()
@@ -20,12 +21,18 @@ const Login = () => {
             .then(result => {
                 console.log(result.user);
                 const user = { email }
-                axios.post('http://localhost:5000/jwt', user,{
-                    withCredentials:true 
+                axios.post('http://localhost:5000/jwt', user, {
+                    withCredentials: true
                 })
                     .then(res => {
                         console.log(res.data);
-                        if(res.data==='success'){
+                        if (res.data === 'success') {
+                            Swal.fire({
+                                title: "Welcome",
+                                text: "Successfully logged in",
+                                icon: "success",
+                                confirmButtonText: 'ok'
+                            });
 
                             navigate(location?.state ? location?.state : '/')
                         }

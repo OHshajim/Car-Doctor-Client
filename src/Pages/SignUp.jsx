@@ -5,6 +5,7 @@ import { RiLinkedinFill } from 'react-icons/ri';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 const SignUp = () => {
     const { SignUp } = useContext(AuthContext)
     const location = useLocation()
@@ -18,6 +19,12 @@ const SignUp = () => {
         SignUp(email, password)
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: "Congratulations",
+                    text: "Successfully Sign up !!!",
+                    icon: "success",
+                    confirmButtonText: 'ok'
+                });
                 navigate(location?.state ? location?.state : '/')
             })
             .catch(error => { console.log(error) })
