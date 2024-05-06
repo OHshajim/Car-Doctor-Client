@@ -5,7 +5,6 @@ import { RiLinkedinFill } from 'react-icons/ri';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 const Login = () => {
     const { Login } = useContext(AuthContext)
@@ -20,29 +19,26 @@ const Login = () => {
         Login(email, password)
             .then(result => {
                 console.log(result.user);
-                const user = { email }
-                axios.post('http://localhost:5000/jwt', user, {
-                    withCredentials: true
-                })
-                    .then(res => {
-                        console.log(res.data);
-                        if (res.data === 'success') {
-                            Swal.fire({
-                                title: "Welcome",
-                                text: "Successfully logged in",
-                                icon: "success",
-                                confirmButtonText: 'ok'
-                            });
+                Swal.fire({
+                    title: "Welcome",
+                    text: "Successfully logged in",
+                    icon: "success",
+                    confirmButtonText: 'ok'
+                });
 
-                            navigate(location?.state ? location?.state : '/')
-                        }
-                    })
+                navigate(location?.state ? location?.state : '/')
+
             })
             .catch(error => {
                 console.log(error)
+                Swal.fire({
+                    title: "Failed",
+                    text: "try again",
+                    icon: "error",
+                    confirmButtonText: 'ok'
+                });
+
             })
-
-
     }
     return (
         <div>

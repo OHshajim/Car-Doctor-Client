@@ -7,7 +7,7 @@ import axios from "axios";
 const Bookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([])
-    const URL = `http://localhost:5000/bookings?email=${user?.email}`
+    const URL = `https://car-doctor-server-seven-ochre.vercel.app/bookings?email=${user?.email}`
     useEffect(() => {
 
         axios.get(URL, { withCredentials: true })
@@ -19,7 +19,7 @@ const Bookings = () => {
         //         setBookings(data)
         //     })
     }, [URL])
-    
+
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -32,7 +32,7 @@ const Bookings = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/bookings/${id}`, {
+                fetch(`https://car-doctor-server-seven-ochre.vercel.app/bookings/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -53,7 +53,7 @@ const Bookings = () => {
 
     }
     const handleConfirm = id => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://car-doctor-server-seven-ochre.vercel.app/bookings/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
